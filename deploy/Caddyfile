@@ -1,0 +1,22 @@
+{
+	email {$EMAIL_TLS}
+}
+{$DOMINIO} {
+	encode gzip
+	request_body {
+		max_size 1MB
+	}
+	header {
+		-Server
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+	}
+	reverse_proxy motor:8750 {
+		header_up X-Real-IP {remote_host}
+	}
+	log {
+		output file /data/acesso.log {
+			roll_size 10mb
+			roll_keep 5
+		}
+	}
+}

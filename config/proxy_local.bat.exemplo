@@ -1,0 +1,6 @@
+@echo off
+REM Copie para proxy_local.bat e ajuste. NÃO grave senha aqui: ela é pedida na abertura e fica só na memória.
+REM Endereço do proxy (TI informa; ou Opções da Internet > Conexões > Configurações da LAN)
+set MOTOR_PROXY=http://SERVIDOR_PROXY:PORTA
+REM set MOTOR_PROXY_USER=seu_usuario
+REM set MOTOR_CA_BUNDLE=C:\certificados\raiz_corporativa.pem

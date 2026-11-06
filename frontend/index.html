@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="description" content="Observatório de Recuperação Judicial e Extrajudicial: processos, partes, credores, estatísticas e previsões a partir de dados públicos.">
+<meta name="color-scheme" content="light">
+<title>Observatório RJ/RE</title>
+<link rel="icon" href="/static/icone.svg?v=__V__" type="image/svg+xml">
+<link rel="stylesheet" href="/static/app.css?v=__V__">
+<script src="/vendor/plotly.min.js?v=__V__" defer></script>
+<script src="/static/app.js?v=__V__" defer></script>
+</head>
+<body>
+<noscript><p class="noscript">Este portal requer JavaScript habilitado.</p></noscript>
+<a class="pular" href="#conteudo">Ir para o conteúdo</a>
+
+<header class="topo">
+  <div class="marca"><img src="/static/icone.svg?v=__V__" alt="" width="28" height="28"><div><strong>Observatório RJ/RE</strong><span>Recuperação judicial e extrajudicial no Brasil</span></div></div>
+  <div class="topo-dir">
+    <span id="selo-atualizacao" class="selo-atual" hidden></span>
+    <span id="nome-usuario" class="usuario-nome" hidden></span>
+    <button id="btn-cadastro" class="btn btn-destaque" hidden>Acesso completo</button>
+    <button id="btn-entrar" class="btn btn-claro">Área restrita</button>
+    <button id="btn-sair" class="btn btn-claro" hidden>Sair</button>
+  </div>
+</header>
+
+<div class="layout">
+  <nav id="menu" aria-label="Navegação principal"></nav>
+  <main id="conteudo" tabindex="-1"></main>
+</div>
+
+<footer class="rodape">
+  <div>Fontes públicas: CNJ (DataJud e DJEN), CVM, Banco Central (SGS e Focus) e Tesouro Transparente. Referência metodológica: Observatório da Insolvência (ABJ/NEPI PUC-SP).</div>
+  <div>Estatísticas e previsões têm caráter informativo e não constituem recomendação. <a href="#metodologia">Como coletamos</a> · <a href="#privacidade">Privacidade</a> · <a href="#contato">Fale conosco</a></div>
+</footer>
+
+<dialog id="dlg-login" aria-labelledby="dlg-login-titulo">
+  <form id="form-login" method="dialog" autocomplete="on">
+    <h2 id="dlg-login-titulo">Área restrita</h2>
+    <label>Usuário<input name="login" autocomplete="username" required maxlength="40"></label>
+    <label>Senha<input name="senha" type="password" autocomplete="current-password" required maxlength="200"></label>
+    <div id="bloco-2fa" hidden>
+      <label>Código do aplicativo autenticador<input name="codigo" inputmode="numeric" maxlength="6" autocomplete="one-time-code"></label>
+      <button type="button" id="usar-recuperacao" class="btn-link">Usar código de recuperação</button>
+      <label id="bloco-recup" hidden>Código de recuperação<input name="recuperacao" maxlength="20"></label>
+    </div>
+    <p id="msg-login" class="msg" role="alert"></p>
+    <div class="acoes"><button type="button" id="fechar-login" class="btn btn-sec">Cancelar</button><button type="submit" class="btn">Entrar</button></div>
+  </form>
+</dialog>
+
+<dialog id="dlg-cadastro" aria-labelledby="dlg-cadastro-titulo" class="dlg-largo">
+  <div id="cadastro-corpo"></div>
+</dialog>
+</body>
+</html>

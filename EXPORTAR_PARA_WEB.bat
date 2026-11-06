@@ -1,0 +1,7 @@
+@echo off
+chcp 65001 >nul
+cd /d "%~dp0"
+call "%~dp0scripts\ambiente.bat" || goto :fim
+%PY% backend\cli.py exportar-publico
+:fim
+pause

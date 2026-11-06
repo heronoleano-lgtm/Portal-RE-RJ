@@ -1,0 +1,20 @@
+# dados, cadastros e segredos – NUNCA versionar
+dados/*
+!dados/.gitkeep
+config/config.json
+config/proxy_local.bat
+config/proxy_local.sh
+deploy/.env
+*.db
+*.db-wal
+*.db-shm
+*.key
+*.xlsx
+*.xls
+*.csv
+DB5186*
+__pycache__/
+*.pyc
+_backup_*/
+.DS_Store
+Thumbs.db

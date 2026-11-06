@@ -1,0 +1,17 @@
+# Alternativa sem Docker (Linux/systemd). Copie para /etc/systemd/system/ e ajuste os caminhos.
+[Unit]
+Description=Observatorio RJ/RE - portal publico
+After=network-online.target
+[Service]
+User=motor
+WorkingDirectory=/opt/observatorio-rj
+Environment=MOTOR_EDICAO=publica MOTOR_HOST=127.0.0.1 MOTOR_PORTA=8750 MOTOR_HTTPS=1
+ExecStart=/usr/bin/python3 backend/cli.py iniciar
+Restart=on-failure
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/opt/observatorio-rj/dados /opt/observatorio-rj/config
+ProtectHome=true
+PrivateTmp=true
+[Install]
+WantedBy=multi-user.target

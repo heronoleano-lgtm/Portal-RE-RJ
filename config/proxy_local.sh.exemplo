@@ -1,0 +1,3 @@
+# Copie para proxy_local.sh se a rede exigir proxy. Senha: não grave aqui.
+# export MOTOR_PROXY=http://servidor:porta
+# export MOTOR_PROXY_USER=usuario

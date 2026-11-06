@@ -1,0 +1,32 @@
+# Portal público: Caddy (HTTPS automático) -> Observatório (edição pública, sem dados internos)
+services:
+  motor:
+    build: { context: .., dockerfile: deploy/Dockerfile }
+    restart: unless-stopped
+    environment:
+      MOTOR_EDICAO: publica
+      MOTOR_HTTPS: "1"
+      MOTOR_CONFIAR_PROXY_PRIVADO: "1"   # porta do motor não é publicada; só o Caddy (rede interna) o alcança
+    volumes:
+      - motor_dados:/app/dados
+      - motor_config:/app/config
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    expose: ["8750"]
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    ports: ["80:80", "443:443"]
+    environment:
+      DOMINIO: ${DOMINIO:?defina DOMINIO no arquivo .env}
+      EMAIL_TLS: ${EMAIL_TLS:?defina EMAIL_TLS no arquivo .env}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_dados:/data
+    depends_on: [motor]
+volumes:
+  motor_dados:
+  motor_config:
+  caddy_dados:

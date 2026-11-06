@@ -1,0 +1,20 @@
+name: qualidade
+on: [push, pull_request]
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: {python: ["3.9", "3.12"]}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "${{ matrix.python }}"}
+      - name: Testes (sem dependências externas)
+        run: python -m unittest discover -s tests -t . -v
+      - uses: actions/setup-node@v4
+        with: {node-version: "20"}
+      - name: Sintaxe do front-end
+        run: node --check frontend/static/app.js && node --check frontend/static/mnt.js
+      - name: Varredura de segredos
+        run: |
+          ! grep -rInE --exclude-dir=.git "(ya29\.[0-9A-Za-z_-]{20,}|gh[pousr]_[0-9A-Za-z]{30,}|-----BEGIN [A-Z ]*PRIVATE KEY-----)" . || (echo "possível segredo no código"; exit 1)
